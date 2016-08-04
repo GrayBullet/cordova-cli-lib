@@ -17,7 +17,12 @@ function createCordovaClirc(rc) {
   return writeFile('.cordova-clirc', JSON.stringify(rc), 'utf8');
 }
 
-var invoke = function (args) {
+/**
+ * Run `cordova` command.
+ * @param {Array} args Arguments.
+ * @returns {Promise} Promise object.
+ */
+function run(args) {
   var cliOptions = optionsFactory.load();
 
   var options = {
@@ -41,6 +46,8 @@ var invoke = function (args) {
         return createCordovaClirc({'cordova-root': root});
       }
     });
-};
+}
 
-module.exports = invoke;
+module.exports = {
+  run: run
+};
