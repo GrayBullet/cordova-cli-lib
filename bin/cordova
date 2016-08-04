@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+var cordova = require('../index');
+
+var argv = process.argv.slice();
+argv.shift();
+argv.shift();
+
+cordova(argv);
