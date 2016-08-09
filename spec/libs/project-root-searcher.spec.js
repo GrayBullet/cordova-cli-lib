@@ -1,3 +1,4 @@
+var path = require('path');
 var Promise = require('../../libs/promise');
 var ProjectRootSearcher = require('../../libs/project-root-searcher');
 
@@ -14,7 +15,7 @@ describe('ProjectRootSearcher', function () {
       target.stat.and.callFake(function (dir) {
         return Promise.resolve({
           isDirectory: function () {
-            return dir === '/aaa/node_modules';
+            return dir === path.normalize('/aaa/node_modules');
           }
         });
       });
@@ -22,9 +23,9 @@ describe('ProjectRootSearcher', function () {
       target.search('/aaa/bbb/ccc')
         .then(function (result) {
           expect(result).toEqual({
-            root: '/aaa',
-            nodeModules: '/aaa/node_modules',
-            bin: '/aaa/node_modules/.bin'
+            root: path.normalize('/aaa'),
+            nodeModules: path.normalize('/aaa/node_modules'),
+            bin: path.normalize('/aaa/node_modules/.bin')
           });
         })
         .then(done);
@@ -34,7 +35,7 @@ describe('ProjectRootSearcher', function () {
       target.stat.and.callFake(function (dir) {
         return Promise.resolve({
           isDirectory: function () {
-            return dir === '/aaa/bbb/ccc/node_modules';
+            return dir === path.normalize('/aaa/bbb/ccc/node_modules');
           }
         });
       });
@@ -42,9 +43,9 @@ describe('ProjectRootSearcher', function () {
       target.search('/aaa/bbb/ccc')
         .then(function (result) {
           expect(result).toEqual({
-            root: '/aaa/bbb/ccc',
-            nodeModules: '/aaa/bbb/ccc/node_modules',
-            bin: '/aaa/bbb/ccc/node_modules/.bin'
+            root: path.normalize('/aaa/bbb/ccc'),
+            nodeModules: path.normalize('/aaa/bbb/ccc/node_modules'),
+            bin: path.normalize('/aaa/bbb/ccc/node_modules/.bin')
           });
         })
         .then(done);

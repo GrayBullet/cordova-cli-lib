@@ -20,6 +20,7 @@ ProjectRootSearcher.prototype.stat = function () {
 
 ProjectRootSearcher.prototype.exists = function () {
   var args = Array.prototype.slice.apply(arguments);
+  // noinspection JSUnresolvedFunction
   return this.stat.apply(this, args)
     .then(function (stats) {
       return stats.isDirectory();
@@ -34,7 +35,7 @@ ProjectRootSearcher.prototype.exists = function () {
 };
 
 ProjectRootSearcher.prototype.search = function (optDir) {
-  var dir = optDir || process.cwd();
+  var dir = path.normalize(optDir || process.cwd());
   var that = this;
 
   return new Promise(function (resolve) {
