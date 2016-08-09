@@ -20,7 +20,7 @@ function createCordovaClirc(rc) {
 /**
  * Run `cordova` command.
  * @param {Array} args Arguments.
- * @returns {Promise} Promise object.
+ * @return {Promise} Promise object.
  */
 function run(args) {
   var cliOptions = optionsFactory.load();
