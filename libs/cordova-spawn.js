@@ -1,5 +1,6 @@
 'use strict';
 
+var os = require('os');
 var spawn = require('child_process').spawn;
 var path = require('path');
 var _ = require('underscore');
@@ -51,7 +52,7 @@ function invoke(cmd, args, optOptions) {
 function getCmdFromSearcher() {
   return ProjectRootSearcher.search()
     .then(function (dir) {
-      return path.join(dir.bin, 'cordova');
+      return path.join(dir.bin, getCmdName());
     });
 }
 
@@ -68,5 +69,18 @@ function getCmd(options) {
 
   return getCmdFromSearcher();
 }
+
+/**
+ * Get cordova command name.
+ * @param {String} [optPlatform] Platform.
+ * @return {String} 'cordova' or 'cordova.cmd'.
+ */
+function getCmdName(optPlatform) {
+  var platform = optPlatform || os.platform();
+
+  return platform === 'win32' ? 'cordova.cmd' : 'cordova';
+}
+
+cordova.getCmdName = getCmdName;
 
 module.exports = cordova;
