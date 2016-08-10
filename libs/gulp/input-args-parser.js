@@ -23,7 +23,7 @@ function flatten(list) {
  * @return {Array.<String>} Command line arguments.
  */
 function getProcessArgs() {
-  return process.env.argv.slice(2);
+  return process.argv.slice(2);
 }
 
 /**

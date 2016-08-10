@@ -3,6 +3,7 @@
 var fs = require('fs');
 var promisify = require('es6-promisify');
 var cordova = require('./libs/cordova-spawn');
+var gulpCordova = require('./libs/gulp/gulp-cordova');
 var optionsFactory = require('./libs/options-loader');
 var cordovaArguments = require('./libs/cordova-arguments');
 
@@ -49,5 +50,6 @@ function run(args) {
 }
 
 module.exports = {
-  run: run
+  run: run,
+  gulp: gulpCordova
 };
