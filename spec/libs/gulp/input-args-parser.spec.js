@@ -37,6 +37,12 @@ describe('inputArgsParser', function () {
 
       expect(result).toEqual(['android', 'ios']);
     });
+
+    it('platforms is none', function () {
+      var result = inputArgsParser.fromArgs(['--other']).platforms();
+
+      expect(result).toEqual([]);
+    });
   });
 
   describe('device', function () {
@@ -54,6 +60,12 @@ describe('inputArgsParser', function () {
 
     it('device is illegal', function () {
       var result = inputArgsParser.fromArgs(['--cordova-device=illegal']).device();
+
+      expect(result).toEqual([]);
+    });
+
+    it('device is none', function () {
+      var result = inputArgsParser.fromArgs(['--other']).device();
 
       expect(result).toEqual([]);
     });
@@ -77,6 +89,26 @@ describe('inputArgsParser', function () {
 
       expect(result).toEqual([]);
     });
+
+    it('build is none', function () {
+      var result = inputArgsParser.fromArgs(['--other']).build();
+
+      expect(result).toEqual([]);
+    });
+  });
+
+  describe('target', function () {
+    it('target is emulator1', function () {
+      var result = inputArgsParser.fromArgs(['--cordova-target=emulator1']).target();
+
+      expect(result).toEqual(['--target=emulator1']);
+    });
+
+    it('target is none', function () {
+      var result = inputArgsParser.fromArgs(['--other']).target();
+
+      expect(result).toEqual([]);
+    });
   });
 
   describe('all', function () {
@@ -85,13 +117,15 @@ describe('inputArgsParser', function () {
         '--cordova-build=release',
         '--cordova-platforms=ios',
         '--cordova-device=emulator',
-        '--cordova-platforms=android'
+        '--cordova-platforms=android',
+        '--cordova-target=emulator1'
       ];
       var input = inputArgsParser.fromArgs(args);
 
       expect(input.platforms()).toEqual(['ios', 'android']);
       expect(input.device()).toEqual(['--emulator']);
       expect(input.build()).toEqual(['--release']);
+      expect(input.target()).toEqual(['--target=emulator1']);
     });
   });
 });

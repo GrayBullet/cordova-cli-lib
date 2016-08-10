@@ -13,6 +13,7 @@ function buildArgs(optCommand, optArgs) {
     .append(input.platforms())
     .append(input.device())
     .append(input.build())
+    .append(input.target())
     .toArray();
 }
 

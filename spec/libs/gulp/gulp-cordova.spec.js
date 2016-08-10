@@ -8,7 +8,8 @@ describe('gulpCordova', function () {
         '--cordova-platforms=android',
         '--cordova-build=release',
         '--cordova-device=emulator',
-        '--cordova-platforms=ios'
+        '--cordova-platforms=ios',
+        '--cordova-target=emulator1'
       ]);
 
       expect(result).toEqual([
@@ -16,7 +17,8 @@ describe('gulpCordova', function () {
         'android',
         'ios',
         '--emulator',
-        '--release'
+        '--release',
+        '--target=emulator1'
       ]);
     });
   });

@@ -63,6 +63,15 @@ function fromOptions(optOptions) {
         default:
           return [];
       }
+    },
+
+    target: function () {
+      var target = options['cordova-target'];
+      if (target) {
+        return ['--target=' + target];
+      }
+
+      return [];
     }
   };
 }
